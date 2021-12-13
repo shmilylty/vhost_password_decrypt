@@ -2,12 +2,15 @@
 
 ## Where is symkey.dat
 Windows：C:\ProgramData\VMware\vCenterServer\cfg\vmware-vpx\ssl\symkey.dat
+
 Linux：/etc/vmware-vpx/ssl/symkey.dat
 
 
 ## Where is psql
 Windows: C:\Program Files\VMware\vCenter Server\vPostgres\bin\psql.exe
+
 Linux: /opt/vmware/vpostgres/9.3/bin/psql
+
 psql -h 127.0.0.1 -p 5432 -U vc -d VCDB -c "select ip_address,user_name,password from vpx_host;" > password.enc
 
 ## How to use
