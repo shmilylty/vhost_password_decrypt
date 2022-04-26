@@ -5,12 +5,19 @@ Windows：C:\ProgramData\VMware\vCenterServer\cfg\vmware-vpx\ssl\symkey.dat
 
 Linux：/etc/vmware-vpx/ssl/symkey.dat
 
+## Where is postgres user password
+Windows: C:\ProgramData\VMware\vCenterServer\cfg\vmware-vps\vcdb.properties
+
+Linux：
+/etc/vmware-vpx/vcdb.properties
+/etc/vmware/service-state/vpxd/vcdb.properties
 
 ## Where is psql
 Windows: C:\Program Files\VMware\vCenter Server\vPostgres\bin\psql.exe
 
 Linux: /opt/vmware/vpostgres/9.3/bin/psql
 
+## export 
 psql -h 127.0.0.1 -p 5432 -U vc -d VCDB -c "select ip_address,user_name,password from vpx_host;" > password.enc
 
 ## How to use
