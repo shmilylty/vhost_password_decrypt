@@ -28,7 +28,7 @@ def pkcs7unpadding(text):
 def decrypt(key, enc_passwords):
     passwords = []
     key_bytes = bytes.fromhex(key)
-    for enc_password in enc_passwords:
+    for ip, usr, enc_password in enc_passwords:
         content = base64.b64decode(enc_password)
         iv_bytes = content[:16]
         enc_password_bytes = content[16:]
@@ -36,7 +36,9 @@ def decrypt(key, enc_passwords):
         password_bytes = cipher.decrypt(enc_password_bytes)
         password = str(password_bytes, encoding='utf-8')
         password = pkcs7unpadding(password)
-        passwords.append(password)
+        line = f'{ip}:{usr}:{password}'
+        print(line) # show the password as you save it to a file 
+        passwords.append(line)
     return passwords
 
 
@@ -49,9 +51,19 @@ def save_decrypt_password(path, passwords):
 def get_encrypt_password(path):
     encrypt_passwords = []
     with open(path) as file:
-        for line in file:
-            encrypt_password = line.strip('*').strip()
-            encrypt_passwords.append(encrypt_password)
+        for idx, line in enumerate(file):
+            # print(idx, line)
+            if idx <= 1:
+                continue
+            try:
+                line = [el.strip() for el in  line.split("|")]
+                ip = line[0]
+                usr = line[1]
+                pw = line[2]
+                encrypt_password = pw.strip('*').strip()
+                encrypt_passwords.append((ip,usr,encrypt_password))
+            except IndexError as e:
+                return encrypt_passwords #return the list up until the error... 
     return encrypt_passwords
 
 
