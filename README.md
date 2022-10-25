@@ -27,3 +27,7 @@ pip3 install pycryptodome
 python3 decrypt.py symkey.dat password.enc password.txt
 
 ![image](https://user-images.githubusercontent.com/24275308/145789863-3911ce8b-b6e1-4114-b051-1cb0c4df5068.png)
+
+
+# How this might help during a pentest / tutorial 
+see the end -> https://pentera.io/blog/information-disclosure-in-vmware-vcenter/
